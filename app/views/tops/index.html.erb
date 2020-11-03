@@ -2,7 +2,8 @@
 
 これはインスタ映えしそう！！　今すぐ行け！！！！
 画像を選んでgoを押すと経路に追加することができます。
-<%= form_with(url: go_path, local: true) do |f| %>
+
+<!--18行目までコメントアウト <%= form_with(url: go_path, local: true) do |f| %>
 <div class="container">
     <% @images.each do |image| %>
         <div class="item">
@@ -14,5 +15,50 @@
     <% end %>
 </div>
 <%= f.submit "go" %>
-<% end %>
+-->
 
+<div id="instagram">
+    <h2>instagram投稿</h2>
+    <div id="instagram-list">
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+window.addEventListener('DOMContentLoaded', function(){
+//facebook-jsonを取得して表示
+    var count = 0;
+    var limit = 10; //表示件数
+    var text = '';
+    var data;
+    var graph_api = 'https://graph.facebook.com/v8.0/';
+    var accessToken = 'access token'; // アクセストークンは各自で入れてください
+    var businessID = 'business ID'; //グラフAPIエクスプローラで取得したinstagram_business_accountのIDも各自で入れてください
+    var fields = 'media{caption,media_url,permalink,timestamp,username}';
+    var url = graph_api + businessID + '?fields=' + fields + "&access_token=" + accessToken;
+    $.ajax({
+        url: url
+    })
+    .done(function(res) {
+        data = res.media;
+        limit = 9;
+        count = 0;
+        $.each(data, function(index, val) {
+            $.each(val, function(i, elem) {
+                if (elem.media_url && count < limit) {
+                    text1 = '<div class="insta__item" ><a class="insta__card" href="'+elem.permalink+'" target="_blank">';
+                    text2 = '<img src="'+elem.media_url+'"><input class="disabled_checkbox" type="checkbox"/>';
+                    text3 = '</a></div>';
+                    count ++;
+                    text = text + text1 + text2 + text3;
+                }
+            });
+        });
+        $('#instagram-list').html(text);
+    })
+    .fail(function(jqXHR, status) {
+        $('#instagram-list').html('<li>読み込みに失敗しました。</li>');
+    })
+});
+</script>
+<% end %>
