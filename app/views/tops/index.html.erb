@@ -13,6 +13,25 @@
         </div><br>
     <% end %>
 </div>
-<%= f.submit "go" %>
+<!-- <%= f.submit "go" %> 遷移先はいらないと思ったのでコメントにしました-->
+<button type="submit" id="btn1">----Go----</button>
 <% end %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(function(){
+  // 初期状態のボタンは無効
+  $("#btn1").prop("disabled", true);
+    // チェックボックスの状態が変わったら（クリックされたら）
+    $("input[type='checkbox']").on('click', function () {
+        if ($("#go_image_name____:checked").length > 0) {
+            // ボタン有効
+            $("#btn1").prop("disabled", false);
+        } else {
+          // ボタン無効
+          $("#btn1").prop("disabled", true);
+        }
+    });
+});
+</script>
 
