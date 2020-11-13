@@ -8,7 +8,7 @@
         <div class="item">
             <%= link_to image_tag("/#{image.image_path}",:class => "thumbnail")%>
             <div class="disabled_checkbox">
-            <%= check_box_tag "go_image_name[#{ image.name }]", image.name %>
+            <%= check_box_tag "go_image_name[#{ image.name }]", image.name  %>
             </div>
         </div><br>
     <% end %>
@@ -24,7 +24,8 @@ $(function(){
   $("#btn1").prop("disabled", true);
     // チェックボックスの状態が変わったら（クリックされたら）
     $("input[type='checkbox']").on('click', function () {
-        if ($("#go_image_name____:checked").length > 0) {
+        // id名はバラバラだったのでワイルドカードで指定した
+        if ($("[id^=go_image_name]:checked").length > 0) { 
             // ボタン有効
             $("#btn1").prop("disabled", false);
         } else {
@@ -34,4 +35,3 @@ $(function(){
     });
 });
 </script>
-
