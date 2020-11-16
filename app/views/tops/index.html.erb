@@ -3,64 +3,35 @@
 これはインスタ映えしそう！！　今すぐ行け！！！！
 Goを押すと経路が見れます。
 
-<!--18行目までコメントアウト <%= form_with(url: go_path, local: true) do |f| %>
+<%= form_with(url: go_path, local: true) do |f| %>
 <div class="container">
     <% @images.each do |image| %>
         <div class="item">
             <%= link_to image_tag("/#{image.image_path}",:class => "thumbnail")%>
             <div class="disabled_checkbox">
-            <%= check_box_tag "go_image_name[#{ image.name }]", image.name %>
+            <%= check_box_tag "go_image_name[#{ image.place_name }]", image.place_name %>
             </div>
         </div><br>
     <% end %>
 </div>
-<%= f.submit "go" %>
--->
+<button type="submit" id="btn1">----Go----</button>
+<% end %>
 
-<div id="instagram">
-    <h2>instagram投稿</h2>
-    <div id="instagram-list">
-    </div>
-</div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
-window.addEventListener('DOMContentLoaded', function(){
-//facebook-jsonを取得して表示
-    var count = 0;
-    var limit = 10; //表示件数
-    var text = '';
-    var data;
-    var graph_api = 'https://graph.facebook.com/v8.0/';
-    const accessToken = gon.insta_access_token; // アクセストークンは各自で入れてください
-    const businessID = gon.insta_business_id; //グラフAPIエクスプローラで取得したinstagram_business_accountのIDは各自で入れてください
-    var fields = 'media{caption,media_url,permalink,timestamp,username}';
-    var url = graph_api + businessID + '?fields=' + fields + "&access_token=" + accessToken;
-    $.ajax({
-        url: url
-    })
-    .done(function(res) {
-        data = res.media;
-        limit = 1;
-        count = 0;
-        $.each(data, function(index, val) {
-            $.each(val, function(i, elem) {
-                if (elem.media_url && count < limit) {
-                    text1 = '<div class="insta__item" ><a class="insta__card" href="'+elem.permalink+'" target="_blank">';
-                    text2 = '<img src="'+elem.media_url+'">';
-                    text3 = '</a></div>';
-                    count ++;
-                    text = text + text1 + text2 + text3;
-                }
-            });
-        });
-        $('#instagram-list').html(text);
-    })
-    .fail(function(jqXHR, status) {
-        $('#instagram-list').html('<li>読み込みに失敗しました。</li>');
-    })
+$(function(){
+  // 初期状態のボタンは無効
+  $("#btn1").prop("disabled", true);
+    // チェックボックスの状態が変わったら（クリックされたら）
+    $("input[type='checkbox']").on('click', function () {
+        // id名はバラバラだったのでワイルドカードで指定した
+        if ($("[id^=go_image_name]:checked").length > 0) { 
+            // ボタン有効
+            $("#btn1").prop("disabled", false);
+        } else {
+          // ボタン無効
+          $("#btn1").prop("disabled", true);
+        }
+    });
 });
 </script>
-
-<a href="https://www.google.com/maps/dir/?api=1&dir_action=navigate&destination=海の駅+あやはし館">Go</a>
-<% end %>
