@@ -1,5 +1,8 @@
-<h1>えんむすび</h1>
 
+<!-- jQuery読み込み -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<h1>えんむすび</h1>
 これはインスタ映えしそう！！　今すぐ行け！！！！
 Goを押すと経路が見れます。
 
@@ -7,31 +10,39 @@ Goを押すと経路が見れます。
 <div class="container">
     <% @images.each do |image| %>
         <div class="item">
-            <%= link_to image_tag("/#{image.image_path}",:class => "thumbnail")%>
+            <%= image_tag("/#{image.image_path}",:class => "thumbnail")%>
             <div class="disabled_checkbox">
-            <%= check_box_tag "go_image_name[#{ image.place_name }]", image.place_name %>
+            <%= check_box_tag "go_image_name[#{ image.place_name }]", image.place_name%>
             </div>
         </div><br>
     <% end %>
 </div>
+
 <button type="submit" id="btn1">----Go----</button>
+
 <% end %>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
-$(function(){
-  // 初期状態のボタンは無効
-  $("#btn1").prop("disabled", true);
-    // チェックボックスの状態が変わったら（クリックされたら）
-    $("input[type='checkbox']").on('click', function () {
-        // id名はバラバラだったのでワイルドカードで指定した
-        if ($("[id^=go_image_name]:checked").length > 0) { 
+$(function() {
+  // チェックボックスのクリックを無効化します。
+  $('.item .disabled_checkbox').click(function() {
+    return false;
+  });
+
+  // 画像がクリックされた時の処理です。
+  $('img.thumbnail').click(function() {
+    $(this).toggleClass("checked");
+
+        if ($("img.thumbnail.checked").length > 0) { //初回は押させるようになってしまっている　直すべきとこ
             // ボタン有効
             $("#btn1").prop("disabled", false);
         } else {
           // ボタン無効
           $("#btn1").prop("disabled", true);
         }
-    });
+  });
 });
+
 </script>
+
+
