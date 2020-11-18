@@ -18,7 +18,7 @@ Goを押すと経路が見れます。
     <% end %>
 </div>
 
-<button type="submit" id="btn1">----Go----</button>
+<button type="submit" id="btn1" class="button" disabled>----Go----</button>
 
 <% end %>
 
@@ -31,8 +31,8 @@ $(function() {
 
   // 画像がクリックされた時の処理です。
   $('img.thumbnail').click(function() {
-    $(this).toggleClass("checked");
-
+    $(this).toggleClass("checked");//クラスにcheckedを追加
+    $("[id^=go_image_name]").prop("checked", true);
         if ($("img.thumbnail.checked").length > 0) { //初回は押させるようになってしまっている　直すべきとこ
             // ボタン有効
             $("#btn1").prop("disabled", false);
