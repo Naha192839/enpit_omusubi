@@ -9,7 +9,7 @@ Goを押すと経路が見れます。
 <%= form_with(url: map_path, local: true) do |f| %>
 <div class="container">
     <% @images.each do |image| %>
-        <div class="item">
+        <div class="item column is-half is-one-quarter-desktop">
             <%= image_tag("/#{image.image_path}",:class => "thumbnail")%>
             <%= check_box_tag "go_image_name[#{ image.place_name }]", image.place_name , false ,class:'disabled_checkbox'%>
         </div><br>
