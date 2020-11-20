@@ -11,7 +11,7 @@ Goを押すと経路が見れます。
     <% @images.each do |image| %>
         <div class="item">
             <%= image_tag("/#{image.image_path}",:class => "thumbnail")%>
-            <%= check_box_tag "go_image_name[#{ image.place_name }]", image.place_name %>
+            <%= check_box_tag "go_image_name[#{ image.place_name }]", image.place_name , false ,class:'disabled_checkbox'%>
         </div><br>
     <% end %>
 </div>
@@ -30,9 +30,9 @@ $(document).on('turbolinks:load', function() {
   // 画像がクリックされた時の処理です。
   $('img.thumbnail').click(function() {
     $(this).toggleClass("checked");//クラスにcheckedを追加
-    var nextCheckbox = $(this).next();//クリックした画像についているチェックボックスを変数に入れた
+    var nextCheckbox = $(this).next();//クリックした画像についているチェックボックスだけを変数に入れた
     
-    if ($(nextCheckbox).prop('checked')) {//その画像にチェックが入っていたら
+    if ($(nextCheckbox).prop('checked')) {　//その画像にチェックが入っていたら
  
       // チェックを外す
       $(nextCheckbox).prop('checked', false);
@@ -43,8 +43,7 @@ $(document).on('turbolinks:load', function() {
       // チェックを入れる
       $(nextCheckbox).prop('checked', true);
     }
-    console.log(nextCheckbox);
-        if ($("img.thumbnail.checked").length > 0) { チェックした画像が1枚以上あれば
+        if ($("img.thumbnail.checked").length > 0) { //チェックした画像が1枚以上あれば
             // ボタン有効
             $("#btn1").prop("disabled", false);
         } else {
