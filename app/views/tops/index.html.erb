@@ -1,37 +1,68 @@
-<h1>えんむすび</h1>
 
+<!-- jQuery読み込み -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<h1>えんむすび</h1>
 これはインスタ映えしそう！！　今すぐ行け！！！！
 Goを押すと経路が見れます。
 
-<%= form_with(url: go_path, local: true) do |f| %>
+<%= form_with(url: map_path, local: true) do |f| %>
 <div class="container">
     <% @images.each do |image| %>
-        <div class="item">
-            <%= link_to image_tag("/#{image.image_path}",:class => "thumbnail")%>
-            <div class="disabled_checkbox">
-            <%= check_box_tag "go_image_name[#{ image.place_name }]", image.place_name %>
-            </div>
+        <div class="item column is-half is-one-quarter-desktop">
+            <%= image_tag("/#{image.image_path}",:class => "thumbnail")%>
+            <%= check_box_tag "go_image_name[#{ image.place_name }]", image.place_name , false ,class:'disabled_checkbox'%>
         </div><br>
     <% end %>
 </div>
-<button type="submit" id="btn1">----Go----</button>
+<div class="is-fab has-content-centered">
+    <button type="submit" id="btn1" class="button is-link is-rounded is-medium" disabled>
+    <span>---Go!---</span>
+  </button>
+</div>
+
 <% end %>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
-$(function(){
-  // 初期状態のボタンは無効
-  $("#btn1").prop("disabled", true);
-    // チェックボックスの状態が変わったら（クリックされたら）
-    $("input[type='checkbox']").on('click', function () {
-        // id名はバラバラだったのでワイルドカードで指定した
-        if ($("[id^=go_image_name]:checked").length > 0) { 
+$(document).on('turbolinks:load', function() {
+  //1回だけリロードさせる
+  if (window.name != "any") {
+    location.reload();
+    window.name = "any";
+  } else {
+    window.name = "";
+  }
+  // チェックボックスのクリックを無効化します。
+  $('.item .disabled_checkbox').click(function() {
+    return false;
+  });
+
+  // 画像がクリックされた時の処理です。
+  $('img.thumbnail').click(function() {
+    $(this).toggleClass("checked");//クラスにcheckedを追加
+    var nextCheckbox = $(this).next();//クリックした画像についているチェックボックスだけを変数に入れた
+    
+    if ($(nextCheckbox).prop('checked')) {　//その画像にチェックが入っていたら
+ 
+      // チェックを外す
+      $(nextCheckbox).prop('checked', false);
+ 
+    // もしチェックが外れていたら
+    } else {
+ 
+      // チェックを入れる
+      $(nextCheckbox).prop('checked', true);
+    }
+        if ($("img.thumbnail.checked").length > 0) { //チェックした画像が1枚以上あれば
             // ボタン有効
             $("#btn1").prop("disabled", false);
         } else {
-          // ボタン無効
+          // 画像をチェックしてないならばボタン無効
           $("#btn1").prop("disabled", true);
         }
-    });
+  });
 });
+
 </script>
+
+
