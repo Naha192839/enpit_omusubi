@@ -25,6 +25,13 @@ Goを押すと経路が見れます。
 
 <script>
 $(document).on('turbolinks:load', function() {
+  //1回だけリロードさせる
+  if (window.name != "any") {
+    location.reload();
+    window.name = "any";
+  } else {
+    window.name = "";
+  }
   // チェックボックスのクリックを無効化します。
   $('.item .disabled_checkbox').click(function() {
     return false;
