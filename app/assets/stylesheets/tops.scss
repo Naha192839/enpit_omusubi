@@ -62,12 +62,18 @@ img.thumbnail {
 
 // Goボタン用設定
 .is-fab {
-    width: 100%;
     position: fixed;
     bottom: 0;
+    margin-left: 70%;
+    margin-bottom: 90px;
 }
 
 .has-content-centered {
     display: flex;
     justify-content: center;
+}
+
+.button.is-large.is-resize {
+    height: 10em;
+    width: 250px;
 }
