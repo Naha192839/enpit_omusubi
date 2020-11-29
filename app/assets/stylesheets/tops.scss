@@ -1,13 +1,7 @@
 h1 {
     color: green;
 }
-
-.food_container {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.view_container {
+.container {
     display: flex;
     flex-wrap: wrap;
 }
@@ -83,3 +77,16 @@ img.thumbnail {
     height: 10em;
     width: 250px;
 }
+
+@keyframes zoom-in {
+    0% {
+     transform: scale(.1);
+    }
+    100% {
+      transform: none;
+    }
+  }
+   
+  .animate {
+    animation: .8s zoom-in;
+  }

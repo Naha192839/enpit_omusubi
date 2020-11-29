@@ -5,42 +5,18 @@
 <h1>えんむすび</h1>
 これはインスタ映えしそう！！　今すぐ行け！！！！
 Goを押すと経路が見れます。
-<nav class="navbar" role="navigation" aria-label="main navigation">
-    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
 
-  <div id="navbarBasicExample" class="navbar-menu">
-    <div class="navbar-start">
-      <a class="navbar-food">
-        食べ物/
-      </a>
-
-      <a class="navbar-view">
-        景色
-        </a>
-  </div>
-</nav>
+<div class="btn">
+  <a href="" class="all" data-filter="all">ALL</a>
+  <a href="" class="food" data-filter="food">食べ物</a>
+  <a href="" class="view" data-filter="view">景色</a>
+</div>
 <%= form_with(url: map_path, local: true) do |f| %>
 
-<div class="food_container">
-  <% @images = Image.where(category:'food') %>
+<div class="container">
     <% @images.each do |image| %>
         <div class="item column is-half is-one-quarter-desktop">
-            <%= image_tag("/#{image.image_path}",:class => "thumbnail")%>
-            <%= check_box_tag "go_image_name[#{ image.place_name }]", image.place_name , false ,class:'disabled_checkbox'%>
-        </div><br>
-    <% end %>  
-</div>
-
-<div class="view_container">
-  <% @images = Image.where(category:'view') %>
-    <% @images.each do |image| %>
-        <div class="item column is-half is-one-quarter-desktop">
-            <%= image_tag("/#{image.image_path}",:class => "thumbnail")%>
+            <%= image_tag("/#{image.image_path}",:class => "thumbnail",:data => "#{image.category}")%>
             <%= check_box_tag "go_image_name[#{ image.place_name }]", image.place_name , false ,class:'disabled_checkbox'%>
         </div><br>
     <% end %>  
@@ -92,11 +68,25 @@ $(document).on('turbolinks:load', function() {
           $("#btn1").prop("disabled", true);
         }
   });
-    $('.navbar-view').click(function() {
-    $("html,body").animate({scrollTop:$('.view_container').offset().top});//景色写真までスクロールする
+
+  $(function(){
+  var $btn = $('.btn [data-filter]'),
+  $list = $('.container [data]');
+  $btn.on('click', function(e) {
+    e.preventDefault();
+     
+    var $btnTxt = $(this).attr('data-filter');
+     
+    if ($btnTxt == 'all'){
+      $list.fadeOut().promise().done(function() {
+        $list.addClass('animate').fadeIn();
+      });
+    } else {
+      $list.fadeOut().promise().done(function() {
+        $list.filter('[data = "' + $btnTxt + '"]').addClass('animate').fadeIn();
+      });
+    }
   });
-  $('.navbar-food').click(function() {
-    $("html,body").animate({scrollTop:$('.food_container').offset().top});//景色写真までスクロールする
   });
 });
 </script>
