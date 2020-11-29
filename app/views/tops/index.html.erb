@@ -5,22 +5,52 @@
 <h1>えんむすび</h1>
 これはインスタ映えしそう！！　今すぐ行け！！！！
 Goを押すと経路が見れます。
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
 
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-food">
+        食べ物/
+      </a>
+
+      <a class="navbar-view">
+        景色
+        </a>
+  </div>
+</nav>
 <%= form_with(url: map_path, local: true) do |f| %>
-<div class="container">
+
+<div class="food_container">
+  <% @images = Image.where(category:'food') %>
     <% @images.each do |image| %>
         <div class="item column is-half is-one-quarter-desktop">
             <%= image_tag("/#{image.image_path}",:class => "thumbnail")%>
             <%= check_box_tag "go_image_name[#{ image.place_name }]", image.place_name , false ,class:'disabled_checkbox'%>
         </div><br>
-    <% end %>
+    <% end %>  
 </div>
+
+<div class="view_container">
+  <% @images = Image.where(category:'view') %>
+    <% @images.each do |image| %>
+        <div class="item column is-half is-one-quarter-desktop">
+            <%= image_tag("/#{image.image_path}",:class => "thumbnail")%>
+            <%= check_box_tag "go_image_name[#{ image.place_name }]", image.place_name , false ,class:'disabled_checkbox'%>
+        </div><br>
+    <% end %>  
+</div>
+
 <div class="is-fab has-content-centered">
     <button type="submit" id="btn1" class="button is-link is-rounded is-large is-resize" disabled>
     <span style="font-size:100px">Go!</span>
   </button>
 </div>
-
 <% end %>
 
 <script>
@@ -39,6 +69,7 @@ $(document).on('turbolinks:load', function() {
 
   // 画像がクリックされた時の処理です。
   $('img.thumbnail').click(function() {
+
     $(this).toggleClass("checked");//クラスにcheckedを追加
     var nextCheckbox = $(this).next();//クリックした画像についているチェックボックスだけを変数に入れた
     
@@ -61,6 +92,11 @@ $(document).on('turbolinks:load', function() {
           $("#btn1").prop("disabled", true);
         }
   });
+    $('.navbar-view').click(function() {
+    $("html,body").animate({scrollTop:$('.view_container').offset().top});//景色写真までスクロールする
+  });
+  $('.navbar-food').click(function() {
+    $("html,body").animate({scrollTop:$('.food_container').offset().top});//景色写真までスクロールする
+  });
 });
-
 </script>
