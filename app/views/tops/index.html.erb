@@ -6,7 +6,7 @@
 これはインスタ映えしそう！！　今すぐ行け！！！！
 Goを押すと経路が見れます。
 
-<div class="btn">
+<div class="category_btn">
   <a href="" class="all" data-filter="all">ALL</a>
   <a href="" class="food" data-filter="food">食べ物</a>
   <a href="" class="view" data-filter="view">景色</a>
@@ -17,7 +17,7 @@ Goを押すと経路が見れます。
     <% @images.each do |image| %>
         <div class="item column is-half is-one-quarter-desktop">
             <%= image_tag("/#{image.image_path}",:class => "thumbnail",:data => "#{image.category}")%>
-            <%= check_box_tag "go_image_name[#{ image.place_name }]", image.place_name , false ,class:'disabled_checkbox'%>
+            <%= check_box_tag "go_image_name[#{ image.place_name }]", image.place_name , false ,class:'disabled_checkbox',data:"#{image.category}"%>
         </div><br>
     <% end %>  
 </div>
@@ -70,20 +70,20 @@ $(document).on('turbolinks:load', function() {
   });
 
   $(function(){
-  var $btn = $('.btn [data-filter]'),
-  $list = $('.container [data]');
-  $btn.on('click', function(e) {
-    e.preventDefault();
+  var $category_btn = $('.category_btn [data-filter]'),//選択したカテゴリーをbtnに入れる
+  $list = $('.container [data]');//container内のdataクラスを持つ要素を入れる
+  $category_btn.on('click', function(e) {//カテゴリーボタンを押したら実行
+    e.preventDefault();//通常aタグをクリックすると指定ページに飛ばされますが、その処理をキャンセルするためにe.preventDefault()を指定します
      
-    var $btnTxt = $(this).attr('data-filter');
+    var $btnTxt = $(this).attr('data-filter');//btnTxtに選択されたカテゴリーを入れる
      
     if ($btnTxt == 'all'){
-      $list.fadeOut().promise().done(function() {
-        $list.addClass('animate').fadeIn();
+      $list.fadeOut().promise().done(function() {//一旦、全画像をフェードアウトさせて
+        $list.addClass('animate').fadeIn();//全画像をフェードインさせる
       });
     } else {
       $list.fadeOut().promise().done(function() {
-        $list.filter('[data = "' + $btnTxt + '"]').addClass('animate').fadeIn();
+        $list.filter('[data = "' + $btnTxt + '"]').addClass('animate').fadeIn();//選択されたカテゴリー写真をフェードインさせる
       });
     }
   });
