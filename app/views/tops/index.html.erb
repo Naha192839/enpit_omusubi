@@ -6,9 +6,9 @@
 これはインスタ映えしそう！！　今すぐ行け！！！！
 Goを押すと経路が見れます。<br>
 
-<button class="button">All</button>
-<button class="button">View</button>
-<button class="button">Food</button>
+<%= link_to "All", root_path, class: 'button' %>
+<%= link_to "View", "/view", class: 'button' %>
+<%= link_to "Food", "/food", class: 'button' %>
 
 <%= form_with(url: map_path, local: true) do |f| %>
 <div class="container">

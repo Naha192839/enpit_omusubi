@@ -1,6 +1,11 @@
 class TopsController < ApplicationController
     def index
-        @images = Image.all
+        if params[:category] then
+            category = params[:category]
+            @images = Image.where(category:category)
+        else
+            @images = Image.all
+        end
         gon.insta_access_token = ENV['INSTA_ACCESS_TOKEN']
         gon.insta_business_id = ENV['INSTA_BUSINESSID']
     end
