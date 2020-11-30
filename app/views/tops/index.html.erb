@@ -2,9 +2,15 @@
 <!-- jQuery読み込み -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<h1>えんむすび</h1>
-これはインスタ映えしそう！！　今すぐ行け！！！！
-Goを押すと経路が見れます。
+
+<div>
+<img src="musubun.png" class="musubun">
+</div>
+
+<%= link_to "All", root_path, class: 'button is-rounded is-large' %>
+<%= link_to "View", "/view", class: 'button is-rounded is-large' %>
+<%= link_to "Food", "/food", class: 'button is-rounded is-large' %>
+
 
 <%= form_with(url: map_path, local: true) do |f| %>
 <div class="container">

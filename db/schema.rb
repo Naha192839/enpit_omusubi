@@ -10,19 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_13_082508) do
+ActiveRecord::Schema.define(version: 2020_11_24_144104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "images", force: :cascade do |t|
-    t.string "place_name"
-    t.decimal "longitude"
-    t.decimal "latitude"
-    t.string "image_path"
+    t.string "place_name", null: false
+    t.decimal "longitude", null: false
+    t.decimal "latitude", null: false
+    t.string "image_path", null: false
     t.string "instagram_link"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "category", null: false
+    t.index ["image_path"], name: "index_images_on_image_path", unique: true
   end
 
 end
