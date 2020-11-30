@@ -7,6 +7,11 @@
 <img src="musubun.png" class="musubun">
 </div>
 
+<%= link_to "All", root_path, class: 'button is-rounded is-large' %>
+<%= link_to "View", "/view", class: 'button is-rounded is-large' %>
+<%= link_to "Food", "/food", class: 'button is-rounded is-large' %>
+
+
 <%= form_with(url: map_path, local: true) do |f| %>
 <div class="container">
     <% @images.each do |image| %>
