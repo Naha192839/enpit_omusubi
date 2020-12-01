@@ -13,6 +13,19 @@ Goを押すと経路が見れます。
 </div>
 <%= form_with(url: map_path, local: true) do |f| %>
 
+=======
+
+<div>
+<img src="musubun.png" class="musubun">
+</div>
+
+<%= link_to "All", root_path, class: 'button is-rounded is-large' %>
+<%= link_to "View", "/view", class: 'button is-rounded is-large' %>
+<%= link_to "Food", "/food", class: 'button is-rounded is-large' %>
+
+
+<%= form_with(url: map_path, local: true) do |f| %>
+>>>>>>> ef0f156d5da0a12b0b2681ad40d8f1631c6fa56b
 <div class="container">
     <% @images.each do |image| %>
         <div class="item column is-half is-one-quarter-desktop">
@@ -20,6 +33,7 @@ Goを押すと経路が見れます。
             <%= check_box_tag "go_image_name[#{ image.place_name }]", image.place_name , false ,class:'disabled_checkbox',data:"#{image.category}"%>
         </div><br>
     <% end %>  
+    <% end %>
 </div>
 
 <div class="is-fab has-content-centered">
@@ -27,6 +41,7 @@ Goを押すと経路が見れます。
     <span style="font-size:100px">Go!</span>
   </button>
 </div>
+
 <% end %>
 
 <script>
@@ -88,5 +103,8 @@ $(document).on('turbolinks:load', function() {
     }
   });
   });
+=======
+>>>>>>> ef0f156d5da0a12b0b2681ad40d8f1631c6fa56b
 });
+
 </script>
