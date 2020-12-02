@@ -75,3 +75,22 @@ img.thumbnail {
     height: 10em;
     width: 250px;
 }
+
+.items {
+    margin-top: 152px;
+}
+
+nav.navbar.is-hidden-desktop {
+    min-height: unset;
+    height: 150px !important;
+}
+
+div.navbar-brand.is-hidden-desktop {
+    min-height: unset;
+    height: 150px !important;
+}
+
+.navbar-item img {
+    max-height: unset !important;
+    height: 70px !important;
+}
