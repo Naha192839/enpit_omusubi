@@ -2,24 +2,25 @@
 <!-- jQuery読み込み -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<!-- bulmaのnavbar -->
-<nav class="navbar is-warning is-fixed-top is-hidden-touch" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand is-hiddent-touch">
-    <a class="navbar-item" href="/">
-    <img src="musubun.png" class="musubun">
-    </a>
-  </div>
 
-  <div id="navbarBasicExample" class="navbar-menu">
+<nav class="navbar is-warning is-fixed-top is-hidden-touch" role="navigation" aria-label="main navigation">
+   <div class="navbar-brand is-hiddent-touch">
+     <a class="navbar-item" href="/">
+     <img src="musubun.png" class="musubun">
+     </a>
+   </div>
+
+
+<div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item is-hidden-touch" href="/">
+      <a class="navbar-item all is-hidden-touch">
         All
       </a>
-      <a class="navbar-item is-hidden-touch" href="/view">
-        View
+      <a class="navbar-item view is-hidden-touch">
+        view
       </a>
-      <a class="navbar-item is-hidden-touch" href="/food">
-        Food
+      <a class="navbar-item food is-hidden-touch">
+        food
       </a>
     </div>
   </div>
@@ -40,14 +41,14 @@
 
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item is-hidden-desktop" href="/">
+      <a class="navbar-item all is-hidden-desktop">
         All
       </a>
-      <a class="navbar-item is-hidden-desktop" href="/view">
-        View
+      <a class="navbar-item view is-hidden-desktop">
+        景色
       </a>
-      <a class="navbar-item is-hidden-desktop" href="/food">
-        Food
+      <a class="navbar-item food is-hidden-desktop">
+        食べ物
       </a>
     </div>
   </div>
@@ -58,7 +59,7 @@
 <%= form_with(url: map_path, local: true) do |f| %>
 <div class="container">
     <% @images.each do |image| %>
-        <div class="item column is-half is-one-quarter-desktop">
+        <div class="item column is-half is-one-quarter-desktop", id= <%= "#{image.category}" %> >
             <%= image_tag("/#{image.image_path}",:class => "thumbnail")%>
             <%= check_box_tag "go_image_name[#{ image.place_name }]", image.place_name , false ,class:'disabled_checkbox'%>
         </div><br>
@@ -113,15 +114,35 @@ $(document).on('turbolinks:load', function() {
   });
 });
 
-$(document).ready(function() {
+$(function() {
+ 
+  // 食べ物ボタンをクリックしたら発動
+  $('.navbar-item.food').click(function() {
+    $(".item").removeClass('behind') //全部の画像からclass　behindを削除してから
+    $("#view.item").addClass('behind');　//景色の写真だけにclass behindを追加
+  });
 
-  // Check for click events on the navbar burger icon
-  $(".navbar-burger").click(function() {
+  // 景色ボタンをクリックしたら発動
+  $('.navbar-item.view').click(function() {
+    $(".item").removeClass('behind')//全部の画像からclass　behindを削除してから
+    $("#food.item").addClass('behind');//食べ物の写真だけにclass behindを追加
+    });
 
-      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-      $(".navbar-burger").toggleClass("is-active");
-      $(".navbar-menu").toggleClass("is-active");
-
+  // ALLボタンをクリックしたら発動
+  $('.navbar-item.all').click(function() {
+    $(".item").removeClass('behind');//全部の画像からclass　behindを削除してから全表示
   });
 });
+
+$(document).ready(function() {
+
+    // Check for click events on the navbar burger icon
+   $(".navbar-burger").click(function() {
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+       $(".navbar-burger").toggleClass("is-active");
+       $(".navbar-menu").toggleClass("is-active");
+
+    });
+ });
 </script>
