@@ -2,15 +2,59 @@
 <!-- jQuery読み込み -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<nav class="navbar is-warning is-fixed-top is-hidden-touch" role="navigation" aria-label="main navigation">
+   <div class="navbar-brand is-hiddent-touch">
+     <a class="navbar-item" href="/">
+     <img src="musubun.png" class="musubun">
+     </a>
+   </div>
 
-<div>
-<img src="musubun.png" class="musubun">
-</div>
 
-<button class="button all  is-link is-outlined">ALL</button>
-<button class="button food is-success is-outlined">食べ物</button>
-<button class="button view is-danger is-outlined">景色</button>
+<div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item all is-hidden-touch">
+        All
+      </a>
+      <a class="navbar-item view is-hidden-touch">
+        view
+      </a>
+      <a class="navbar-item food is-hidden-touch">
+        food
+      </a>
+    </div>
+  </div>
+</nav>
+<!-- /bulmaのnavbar -->
+<!-- bulmaのnavbar -->
+<nav class="navbar is-warning is-fixed-top is-hidden-desktop" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand is-hidden-desktop">
+    <a class="navbar-item" href="/">
+    <img src="musubun.png" class="is-hidden-desktop musubun">
+    </a>
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" style="height: 150px; width: 150px">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
 
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item all is-hidden-desktop">
+        All
+      </a>
+      <a class="navbar-item view is-hidden-desktop">
+        景色
+      </a>
+      <a class="navbar-item food is-hidden-desktop">
+        食べ物
+      </a>
+    </div>
+  </div>
+</nav>
+<!-- /bulmaのnavbar -->
+
+<div class="items">
 <%= form_with(url: map_path, local: true) do |f| %>
 <div class="container">
     <% @images.each do |image| %>
@@ -27,6 +71,7 @@
 </div>
 
 <% end %>
+</div>
 
 <script>
 $(document).on('turbolinks:load', function() {
@@ -47,7 +92,7 @@ $(document).on('turbolinks:load', function() {
     $(this).toggleClass("checked");//クラスにcheckedを追加
     var nextCheckbox = $(this).next();//クリックした画像についているチェックボックスだけを変数に入れた
     
-    if ($(nextCheckbox).prop('checked')) {　//その画像にチェックが入っていたら
+    if ($(nextCheckbox).prop('checked')) { //その画像にチェックが入っていたら
  
       // チェックを外す
       $(nextCheckbox).prop('checked', false);
@@ -71,20 +116,32 @@ $(document).on('turbolinks:load', function() {
 $(function() {
  
   // 食べ物ボタンをクリックしたら発動
-  $('.button.food').click(function() {
+  $('.navbar-item.food').click(function() {
     $(".item").removeClass('behind') //全部の画像からclass　behindを削除してから
     $("#view.item").addClass('behind');　//景色の写真だけにclass behindを追加
   });
 
   // 景色ボタンをクリックしたら発動
-  $('.button.view').click(function() {
+  $('.navbar-item.view').click(function() {
     $(".item").removeClass('behind')//全部の画像からclass　behindを削除してから
     $("#food.item").addClass('behind');//食べ物の写真だけにclass behindを追加
     });
 
   // ALLボタンをクリックしたら発動
-  $('.button.all').click(function() {
+  $('.navbar-item.all').click(function() {
     $(".item").removeClass('behind');//全部の画像からclass　behindを削除してから全表示
   });
 });
+
+$(document).ready(function() {
+
+    // Check for click events on the navbar burger icon
+   $(".navbar-burger").click(function() {
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+       $(".navbar-burger").toggleClass("is-active");
+       $(".navbar-menu").toggleClass("is-active");
+
+    });
+ });
 </script>
