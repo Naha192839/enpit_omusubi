@@ -101,8 +101,12 @@ div.navbar-brand.is-hidden-desktop {
     height: 8px !important;
 }
 
-.navbar-item {
+.navbar-item.is-hidden-touch {
     font-size: 40px !important;
+}
+
+.navbar-item.is-hidden-desktop {
+    font-size: 60px !important;
 }
 
 .navbar-burger span:nth-child(1) {
