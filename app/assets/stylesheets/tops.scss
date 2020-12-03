@@ -80,36 +80,39 @@ img.thumbnail {
     margin-top: 152px;
 }
 
- nav.navbar.is-hidden-desktop {
+nav.navbar.is-hidden-desktop {
     min-height: unset;
     height: 150px !important;
 }
 
- div.navbar-brand.is-hidden-desktop {
+
+div.navbar-brand.is-hidden-desktop {
     min-height: unset;
     height: 150px !important;
 }
 
- .navbar-item img {
+
+.navbar-item img {
     max-height: unset !important;
     height: 70px !important;
 }
 
- .navbar-burger span {
+.navbar-burger span {
     left: 25px !important;
     width: 100px !important;
     height: 8px !important;
 }
 
- .navbar-item.is-hidden-touch {
+
+.navbar-item.is-hidden-touch {
     font-size: 40px !important;
 }
 
- .navbar-item.is-hidden-desktop {
+.navbar-item.is-hidden-desktop {
     font-size: 60px !important;
 }
 
- .navbar-burger span:nth-child(1) {
+.navbar-burger span:nth-child(1) {
     top: calc(50% - 27px) !important;
 }
 .navbar-burger span:nth-child(3) {
@@ -120,4 +123,5 @@ img.thumbnail {
 }
 .navbar-burger.is-active span:nth-child(3) {
     transform: translateY(-22px) rotate(-45deg) !important;
-} 
+}
+
