@@ -81,7 +81,24 @@ button[disabled] {
     overflow: hidden;
     box-shadow: 0px 0px 0px 5px #87befd;
     border: dashed 5px #FFF;
-    transition: .2s;
+    transition: .02s;
+    font-size: 100px;
+    padding-left: 48px;
+  }
+  .button.btn-circle-stitch:disabled {
+    display: inline-block;
+    text-decoration: none;
+    background: #87befd;
+    color: #FFF;
+    width: 250px;
+    height: 250px;
+    line-height: 153px;
+    border-radius: 50%;
+    text-align: center;
+    overflow: hidden;
+    box-shadow: 0px 0px 0px 5px #87befd;
+    border: dashed 5px #FFF;
+    transition: .02s;
     font-size: 100px;
     padding-left: 48px;
   }
