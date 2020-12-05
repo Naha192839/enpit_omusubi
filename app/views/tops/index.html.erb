@@ -2,7 +2,7 @@
 <!-- jQuery読み込み -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-
+<!-- bulmaのnavbar desktop -->
 <nav class="navbar is-warning is-fixed-top is-hidden-touch" role="navigation" aria-label="main navigation">
    <div class="navbar-brand is-hiddent-touch">
      <a class="navbar-item" href="/">
@@ -17,16 +17,27 @@
         All
       </a>
       <a class="navbar-item view is-hidden-touch">
-        view
+        景色
       </a>
       <a class="navbar-item food is-hidden-touch">
-        food
+        食べ物
       </a>
+    </div>
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <button type="submit" form="go_button" id="btn2" class="button is-info" disabled>
+            <span style="font-size: 30px">
+            <strong>Go!→</strong>
+            </span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
 <!-- /bulmaのnavbar -->
-<!-- bulmaのnavbar -->
+<!-- bulmaのnavbar touch -->
 <nav class="navbar is-warning is-fixed-top is-hidden-desktop" role="navigation" aria-label="main navigation">
   <div class="navbar-brand is-hidden-desktop">
     <a class="navbar-item" href="/">
@@ -56,7 +67,7 @@
 <!-- /bulmaのnavbar -->
 
 <div class="items">
-<%= form_with(url: map_path, local: true) do |f| %>
+<%= form_with(url: map_path, local: true, id: "go_button") do |f| %>
 <div class="container">
     <% @images.each do |image| %>
         <div class="item column is-half is-one-quarter-desktop", id= <%= "#{image.category}" %> >
@@ -65,9 +76,9 @@
         </div><br>
     <% end %>
 </div>
-<div class="is-fab has-content-centered">
-    <button type="submit" id="btn1" class="button is-link is-rounded is-large is-resize" disabled>
-    <span style="font-size:100px">Go!</span>
+<div class="is-fab has-content-centered is-hidden-desktop">
+    <button type="submit" id="btn1" class="button btn-circle-stitch is-resize" disabled>
+      <span>Go!</span>
   </button>
 </div>
 
@@ -107,9 +118,11 @@ $(document).on('turbolinks:load', function() {
         if ($("img.thumbnail.checked").length > 0) { //チェックした画像が1枚以上あれば
             // ボタン有効
             $("#btn1").prop("disabled", false);
+            $("#btn2").prop("disabled", false);
         } else {
           // 画像をチェックしてないならばボタン無効
           $("#btn1").prop("disabled", true);
+          $("#btn2").prop("disabled", true);
         }
   });
 });
