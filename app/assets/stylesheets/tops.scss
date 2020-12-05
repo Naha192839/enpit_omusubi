@@ -62,8 +62,8 @@ img.thumbnail {
 .is-fab {
     position: fixed;
     bottom: 0;
-    margin-left: 70%;
-    margin-bottom: 90px;
+    margin-left: 75%;
+    margin-bottom: 55px;
 }
 button[disabled] {
     pointer-events: none;
@@ -73,9 +73,9 @@ button[disabled] {
     text-decoration: none;
     background: #87befd;
     color: #FFF;
-    width: 250px;
-    height: 250px;
-    line-height: 153px;
+    width: 200px;
+    height: 200px;
+    line-height: 100px;
     border-radius: 50%;
     text-align: center;
     overflow: hidden;
@@ -83,24 +83,14 @@ button[disabled] {
     border: dashed 5px #FFF;
     transition: .02s;
     font-size: 100px;
-    padding-left: 48px;
+    padding-left: 20px;
   }
   .button.btn-circle-stitch:disabled {
-    display: inline-block;
     text-decoration: none;
     background: #87befd;
-    color: #FFF;
-    width: 250px;
-    height: 250px;
-    line-height: 153px;
-    border-radius: 50%;
-    text-align: center;
     overflow: hidden;
     box-shadow: 0px 0px 0px 5px #87befd;
     border: dashed 5px #FFF;
-    transition: .02s;
-    font-size: 100px;
-    padding-left: 48px;
   }
 .button.btn-circle-stitch:hover {
     background: #668ad8;
