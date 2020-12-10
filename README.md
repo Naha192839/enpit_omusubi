@@ -27,7 +27,7 @@ Things you may want to cover:
 Omusubi
 
 ## サービス名
-Musbun
+Musubun
 
 ## エレベーターピッチ
 Musbunとは
